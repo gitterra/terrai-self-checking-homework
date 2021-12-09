@@ -48,7 +48,7 @@ class Worker(object):
     
     
     def choosehw(self):
-        if format(self.user.hwid)[0] == 0:
+        if self.user.levelid == 1:
             ultralightworker = ultralight.Worker(self.user)
             ultralightworker.start()            
             
