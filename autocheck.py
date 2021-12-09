@@ -43,6 +43,8 @@ class Worker(object):
             del self.button_start
         else:
             self.button_start.disabled = False
+            display.display(self.login_text)
+            display.display(self.button_start)
     
     
     def choosehw(self):
