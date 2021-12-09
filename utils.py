@@ -44,7 +44,6 @@ class User(object):
         
     def setlogin(self, email):
         self.login = email
-        self.login = 'nejronki.backup@gmail.com'
         
     def autorization(self):
         # Список параметров, отправляемых на сервер
