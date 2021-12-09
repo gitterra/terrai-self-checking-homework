@@ -8,6 +8,14 @@ from termcolor import colored
 # Функция вывода сообщения об ошибке
 def error_programm(text: str):
     print(colored(text, color='red', attrs=['bold']))
+
+def get_points_text(points):
+    if points in [0, 5 , 6, 7, 8, 9, 10]:
+        return f'{points} баллов'
+    if points in [2, 3, 4]:
+        return f'{points} балла'
+    if points == 1:
+        return f' {points} балл'
     
 class Keywords():
     def __init__(self, vars_):
