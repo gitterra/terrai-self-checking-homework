@@ -1,5 +1,6 @@
 import requests, os, random, json
 from . import settings
+from . import utils
 import ipywidgets as widgets
 from IPython import display
 from termcolor import colored
