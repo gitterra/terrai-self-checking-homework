@@ -48,7 +48,7 @@ class Worker(object):
     
     
     def choosehw(self):
-        if self.user.hwid in [1738, 1461, 1465, 1469, 1523, 1527, 1531, 1535, 1539, 1543, 1547, 1551, 1555, 1559, 1563, 1567, 1625]:
+        if format(self.user.hwid)[0] == 0:
             ultralightworker = ultralight.Worker(self.user)
             ultralightworker.start()            
             
