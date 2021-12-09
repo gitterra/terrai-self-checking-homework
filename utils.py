@@ -1,6 +1,7 @@
 from IPython.core.display import HTML
 from IPython import display
 from . import settings
+from . import utils
 import requests, os
 from termcolor import colored
 
