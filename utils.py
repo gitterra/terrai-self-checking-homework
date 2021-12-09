@@ -38,9 +38,9 @@ class User(object):
     def __init__(self, hwid, cnt):
         self.login = ''        
         self.id = -1
-        self.hwid = hwid
-        self.content = cnt        
-        pass
+        self.hwid = int(format(hwid)[1:])
+        self.levelid = int(format(hwid)[0])
+        self.content = cnt 
         
     def setlogin(self, email):
         self.login = email
