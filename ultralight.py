@@ -145,7 +145,7 @@ class Worker(object):
         # Отображение результата тестирования
         if sum(result) < 10:
             # Если есть ошибки
-            print(colored(f'Ваш результат составил {sum(result)} баллов(а)',
+            print(colored(f'Ваш результат составил {utils.get_points_text(sum(result))}',
                           color='red', attrs=['bold']))
             print('   * Для повторного тестирования нажмите «Пересдать»')
             print('   * Для сдачи домшней работы нажмите «Зачесть ДЗ»')
