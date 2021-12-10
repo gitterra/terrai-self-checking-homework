@@ -95,16 +95,16 @@ class Worker(object):
                 disabled=False,
                 button_style ='', # 'success', 'info', 'warning', 'danger' or ''
                 tooltips=answers,
-              )
-            print('\n'*3)            
+              )                       
             # Печать текста вопроса
             print(colored(f'Вопрос №{i+1}: \n{q["text"]}:', attrs=['bold']))
+            print('\n')
             # Печать вариантов ответа
             for i in range(4):
-                print(' '*5, variants[i] + ') ' + answers[i].lstrip().replace("'",""))        
-            print('\n')
+                print(' '*5, variants[i] + ') ' + answers[i].lstrip().replace("'",""))                    
             display.display(wt) # Вывод кнопок с ответами
             self.answerbuttons.append(wt) # Сохранение кнопок 
+            print('\n'*3) 
         self.showbuttons(self.button_check)
         
         
