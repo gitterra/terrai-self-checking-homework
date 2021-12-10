@@ -102,6 +102,7 @@ class Worker(object):
             # Печать вариантов ответа
             for i in range(4):
                 print(' '*5, variants[i] + ') ' + answers[i].lstrip().replace("'",""))        
+            print('\n')
             display.display(wt) # Вывод кнопок с ответами
             self.answerbuttons.append(wt) # Сохранение кнопок 
         self.showbuttons(self.button_check)
