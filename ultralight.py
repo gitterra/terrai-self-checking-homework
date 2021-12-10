@@ -98,7 +98,7 @@ class Worker(object):
               )
             print('\n'*3)            
             # Печать текста вопроса
-            print(colored(f'Вопрос №{i+1}: {q["text"]}:', attrs=['bold']))
+            print(colored(f'Вопрос №{i+1}: \n{q["text"]}:', attrs=['bold']))
             # Печать вариантов ответа
             for i in range(4):
                 print(' '*5, variants[i] + ') ' + answers[i].lstrip().replace("'",""))        
