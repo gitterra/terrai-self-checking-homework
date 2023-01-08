@@ -77,17 +77,18 @@ class Worker(object):
     def showquestion(self, target):
         self.buttonsdisable()
         # Параметры запроса (id домашки)
-        param = {'hwid': self.user.hwid}
+        param = {'hw_id': self.user.hwid,
+                'action': 2}
         # Отправка запроса на сервер (получение списка из случайных 10 вопросов)
-        questions = requests.get(
-            os.path.join(settings.SERVER, settings.PAGE_QUESTION),
+        questions = requests.post(
+            f'{settings.SERVER}{settings.PAGE}',
             params=param).json()
         variants = ['a','b','c','d'] # Нумерация ответов
         self.reload()
         # Визуализация вопросов
         for i, q in enumerate(questions):
-            answers = q['variants'][1:-1].split("',") # Получение вариантов ответов
-            self.questionsid.append(q['id']) # Сохранение id вопроса
+            answers = q['variants'] # Получение вариантов ответовself.questionsid.append(q['id']) # Сохранение id вопроса
+            self.questionsid.append(q['id']-1) # Сохранение id вопроса
             # Создание кнопок с вариантами ответов
             wt = widgets.ToggleButtons(
                 value=None,
@@ -110,11 +111,12 @@ class Worker(object):
         
     def checkhomework(self, target):
         self.buttonsdisable()
-        param = {'hwid': self.user.hwid,
+        param = {'hw_id': self.user.hwid,
              'questions': json.dumps(self.questionsid),
              'answers':'',
              'status': 0,
-             'user_id': self.user.id
+             'userid': self.user.id,
+             'action':3,
             }
         # Получение ответов пользователя
         useranswers = [self.answerbuttons[i].options.index(self.answerbuttons[i].value) 
@@ -124,8 +126,9 @@ class Worker(object):
         param['answers'] = json.dumps(useranswers)
         
         # Проверка ответов пользователя на сервере
-        data = requests.get(os.path.join(settings.SERVER, settings.PAGE_CHECK_UL), 
-                            params=param)
+        data = requests.post(
+            f'{settings.SERVER}{settings.PAGE}',
+            params=param)
         # Проверка ответа сервера
         if data.status_code!=200:
             # Если сервер не обработал запрос
@@ -165,11 +168,12 @@ class Worker(object):
     def sendhomework(self, target):
         display.clear_output(wait=True)# Список параметров, отправляемых на сервер    
         self.buttonsdisable()
-        param = {'hwid': self.user.hwid,
+        param = {'hw_id': self.user.hwid,
                  'questions': json.dumps(self.questionsid),
                  'answers':'',
                  'status': 1,
-                 'userid': self.user.id
+                 'userid': self.user.id,
+                 'action':3,
                 }
         # Получение ответов пользователя
         useranswers = [self.answerbuttons[i].options.index(self.answerbuttons[i].value) 
@@ -179,6 +183,11 @@ class Worker(object):
         param['answers'] = json.dumps(useranswers)
         
         # Проверка ответов пользователя на сервере
-        data = requests.get(os.path.join(settings.SERVER, settings.PAGE_CHECK_UL), 
-                            params=param)
+        data = requests.post(
+            f'{settings.SERVER}{settings.PAGE}',
+            params=param)
+        if data.status_code!=200:
+          print('Ошибка сервера')
+          print(data.text)
+          return
         print(data.json()['result'])  
