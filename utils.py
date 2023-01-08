@@ -56,9 +56,10 @@ class User(object):
     def autorization(self):
         # Список параметров, отправляемых на сервер
         param = {'login': self.login,
-                 'hw_id': self.hwid}
+                 'hw_id': self.hwid,
+                 'action': 1}
         # Проверка ответов пользователя на сервере
-        data = requests.get(os.path.join(settings.SERVER, settings.PAGE_LOGIN), 
+        data = requests.post(f'{settings.SERVER}{settings.PAGE}', 
                             params=param)
         if 'result' in data.json():        
             if data.json()['result']==-1:
